@@ -15,6 +15,7 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
+      arrayCard: [],
     };
   }
 
@@ -53,20 +54,21 @@ class App extends React.Component {
   };
 
   onSaveButtonClick = () => {
-    // const { cardName, cardDescription, cardImage, cardAttr1, cardAttr2, cardAttr3,
-    //   cardRare } = this.state;
-    // let armazenaCard = [];
+    const { cardName, cardDescription, cardImage, cardAttr1, cardAttr2, cardAttr3,
+      cardRare, cardTrunfo, arrayCard } = this.state;
 
-    // armazenaCard.push({
-    //   cardName: { cardName },
-    //   cardImage: { cardImage },
-    //   cardDescription: { cardDescription },
-    //   cardAttr1: { cardAttr1 },
-    //   cardAttr2: { cardAttr2 },
-    //   cardAttr3: { cardAttr3 },
-    //   cardRare: { cardRare },
-    // });
-    this.setState({
+    const armazenaCard = { cardName,
+      cardImage,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardRare,
+      cardTrunfo };
+    console.log(armazenaCard);
+    console.log(arrayCard);
+    this.setState((prevState) => ({
+      arrayCard: [...prevState.arrayCard, armazenaCard],
       cardName: '',
       cardDescription: '',
       cardAttr1: '0',
@@ -76,7 +78,12 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
-    });
+    }));
+  };
+
+  verificaTrunfo = () => {
+    const { arrayCard } = this.state;
+    return arrayCard.some((param) => param.cardTrunfo);
   };
 
   render() {
@@ -107,6 +114,7 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onSaveButtonClick={ this.onSaveButtonClick }
+          hasTrunfo={ this.verificaTrunfo() }
         />
         <Card
           cardName={ cardName }
