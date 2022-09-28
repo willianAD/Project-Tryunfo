@@ -55,7 +55,7 @@ class App extends React.Component {
 
   onSaveButtonClick = () => {
     const { cardName, cardDescription, cardImage, cardAttr1, cardAttr2, cardAttr3,
-      cardRare, cardTrunfo, arrayCard } = this.state;
+      cardRare, cardTrunfo } = this.state;
 
     const armazenaCard = { cardName,
       cardImage,
@@ -65,8 +65,7 @@ class App extends React.Component {
       cardAttr3,
       cardRare,
       cardTrunfo };
-    console.log(armazenaCard);
-    console.log(arrayCard);
+
     this.setState((prevState) => ({
       arrayCard: [...prevState.arrayCard, armazenaCard],
       cardName: '',
@@ -83,8 +82,14 @@ class App extends React.Component {
 
   verificaTrunfo = () => {
     const { arrayCard } = this.state;
-    return arrayCard.some((param) => param.cardTrunfo);
+    return arrayCard.some((verify) => verify.cardTrunfo);
   };
+
+  // apagaCard = () => {
+  //   this.setState({
+
+  //   });
+  // };
 
   render() {
     const {
@@ -97,6 +102,7 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       isSaveButtonDisabled,
+      arrayCard,
     } = this.state;
 
     return (
@@ -126,6 +132,18 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
+        { arrayCard.map((card) => (
+          <div key={ card.cardName }>
+            <Card { ...card } />
+            <button
+              data-testid="delete-button"
+              id={ card.cardName }
+              type="button"
+              // onClick={ this.apagaCard }
+            >
+              Excluir
+            </button>
+          </div>))}
       </>
     );
   }
