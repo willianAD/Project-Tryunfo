@@ -85,11 +85,13 @@ class App extends React.Component {
     return arrayCard.some((verify) => verify.cardTrunfo);
   };
 
-  // apagaCard = () => {
-  //   this.setState({
-
-  //   });
-  // };
+  apagaCard = ({ target }) => {
+    const { arrayCard } = this.state;
+    const apaga = arrayCard.filter((card) => card.cardName !== target.id);
+    this.setState({
+      arrayCard: apaga,
+    });
+  };
 
   render() {
     const {
@@ -139,7 +141,7 @@ class App extends React.Component {
               data-testid="delete-button"
               id={ card.cardName }
               type="button"
-              // onClick={ this.apagaCard }
+              onClick={ this.apagaCard }
             >
               Excluir
             </button>
