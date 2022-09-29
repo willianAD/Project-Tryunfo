@@ -16,6 +16,8 @@ class App extends React.Component {
       cardTrunfo: false,
       isSaveButtonDisabled: true,
       arrayCard: [],
+      searchCard: [],
+      searchQuery: '',
     };
   }
 
@@ -93,6 +95,20 @@ class App extends React.Component {
     });
   };
 
+  filtraName = ({ target }) => {
+    const { arrayCard } = this.state;
+    const pesquisa = arrayCard.filter((card) => card.cardName.includes(target.value));
+    this.setState({
+      searchCard: pesquisa,
+      searchQuery: target.value,
+    });
+  };
+
+  filtraRare = ({ target }) => {
+    const { arrayCard } = this.state;
+    arrayCard.filter((card) => card.cardRare.includes(target.value));
+  };
+
   render() {
     const {
       cardName,
@@ -105,6 +121,8 @@ class App extends React.Component {
       cardTrunfo,
       isSaveButtonDisabled,
       arrayCard,
+      searchCard,
+      searchQuery,
     } = this.state;
 
     return (
@@ -134,18 +152,56 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        { arrayCard.map((card) => (
-          <div key={ card.cardName }>
-            <Card { ...card } />
-            <button
-              data-testid="delete-button"
-              id={ card.cardName }
-              type="button"
-              onClick={ this.apagaCard }
-            >
-              Excluir
-            </button>
-          </div>))}
+        <label htmlFor="req10">
+          <input
+            id="req10"
+            name="searchQuery"
+            value={ searchQuery }
+            data-testid="name-filter"
+            type="text"
+            onChange={ this.filtraName }
+          />
+        </label>
+        <label htmlFor="req11">
+          <select
+            id="req11"
+            data-testid="rare-filter"
+            // value={}
+            onChange={ this.filtraRare }
+          >
+            <option value="todas">todas</option>
+            <option value="normal">normal</option>
+            <option value="raro">raro</option>
+            <option value="muito raro">muito raro</option>
+          </select>
+        </label>
+        { searchQuery.length > 0
+          ? searchCard.map((card) => (
+            <div key={ card.cardName }>
+              <Card { ...card } />
+              <button
+                data-testid="delete-button"
+                id={ card.cardName }
+                type="button"
+                onClick={ this.apagaCard }
+              >
+                Excluir
+              </button>
+            </div>))
+          : (
+            arrayCard.map((card) => (
+              <div key={ card.cardName }>
+                <Card { ...card } />
+                <button
+                  data-testid="delete-button"
+                  id={ card.cardName }
+                  type="button"
+                  onClick={ this.apagaCard }
+                >
+                  Excluir
+                </button>
+              </div>
+            )))}
       </>
     );
   }
