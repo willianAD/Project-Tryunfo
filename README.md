@@ -6,8 +6,9 @@ O uso de estados de componentes em React, assim como captura de eventos e formul
 
 ## Funcionalidades
 
-- Criar um card da sua escolha com uma imagen que deseje e atribuir os poderes.
+- Criar um card da sua escolha com uma imagem que deseje e atribuir os poderes, nome e descrição.
 - Os poderes não devem exceder os pontos maximos(90).
+- Todos os campos devem ser preenchidos para salvar um card.
 - Pode filtrar as cartas criadas na lista de todas as cartas pelo nome, tipo ou super trunfo.
 
 ## Pré-requisitos
