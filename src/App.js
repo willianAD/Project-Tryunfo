@@ -18,6 +18,8 @@ class App extends React.Component {
       arrayCard: [],
       searchCard: [],
       searchQuery: '',
+      valueRare: '',
+      valueReq12: '',
     };
   }
 
@@ -106,7 +108,17 @@ class App extends React.Component {
 
   filtraRare = ({ target }) => {
     const { arrayCard } = this.state;
-    arrayCard.filter((card) => card.cardRare.includes(target.value));
+    const verify = arrayCard.filter((card) => card.cardRare.includes(target.value));
+    this.setState({
+      searchCard: verify,
+      valueRare: target.value,
+    });
+  };
+
+  filtraCheckbox = ({ target }) => {
+    this.setState({
+      valueReq12: target.value,
+    });
   };
 
   render() {
@@ -123,6 +135,8 @@ class App extends React.Component {
       arrayCard,
       searchCard,
       searchQuery,
+      valueRare,
+      valueReq12,
     } = this.state;
 
     return (
@@ -166,7 +180,7 @@ class App extends React.Component {
           <select
             id="req11"
             data-testid="rare-filter"
-            // value={}
+            value={ valueRare }
             onChange={ this.filtraRare }
           >
             <option value="todas">todas</option>
@@ -174,6 +188,16 @@ class App extends React.Component {
             <option value="raro">raro</option>
             <option value="muito raro">muito raro</option>
           </select>
+        </label>
+        <label htmlFor="req12">
+          <input
+            data-testid="trunfo-filter"
+            id="req12"
+            type="checkbox"
+            checked={ valueReq12 }
+            onChange={ this.filtraCheckbox }
+          />
+          Super Trunfo
         </label>
         { searchQuery.length > 0
           ? searchCard.map((card) => (
