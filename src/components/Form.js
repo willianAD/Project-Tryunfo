@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/form.css';
 
 class Form extends React.Component {
   render() {
@@ -20,8 +21,9 @@ class Form extends React.Component {
 
     return (
       <form>
+        <h3>ADICIONE NOVA CARTA</h3>
         <label htmlFor="name">
-          Nome
+          <span>Nome </span>
           <input
             data-testid="name-input"
             id="name"
@@ -31,9 +33,8 @@ class Form extends React.Component {
             onChange={ onInputChange }
           />
         </label>
-        <br />
         <label htmlFor="description">
-          Descrição
+          <p>Descrição</p>
           <textarea
             data-testid="description-input"
             id="description"
@@ -45,7 +46,7 @@ class Form extends React.Component {
         </label>
         <br />
         <label htmlFor="attribute1">
-          Attr01
+          <span>Attr01 </span>
           <input
             data-testid="attr1-input"
             id="attribute1"
@@ -57,7 +58,7 @@ class Form extends React.Component {
         </label>
         <br />
         <label htmlFor="attribute2">
-          Attr02
+          <span>Attr02 </span>
           <input
             data-testid="attr2-input"
             id="attribute2"
@@ -69,7 +70,7 @@ class Form extends React.Component {
         </label>
         <br />
         <label htmlFor="attribute3">
-          Attr03
+          <span>Attr03 </span>
           <input
             data-testid="attr3-input"
             id="attribute3"
@@ -81,7 +82,7 @@ class Form extends React.Component {
         </label>
         <br />
         <label htmlFor="image">
-          Imagem
+          <span>Imagem</span>
           <input
             data-testid="image-input"
             id="image"
@@ -93,6 +94,7 @@ class Form extends React.Component {
         </label>
         <br />
         <label htmlFor="raridade">
+          Raridade
           <select
             id="raridade"
             data-testid="rare-input"
